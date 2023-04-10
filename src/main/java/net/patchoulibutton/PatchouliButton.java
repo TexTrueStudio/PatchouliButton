@@ -8,7 +8,7 @@ import net.minecraft.util.Identifier;
 import net.patchoulibutton.config.PatchouliButtonConfig;
 import net.patchoulibutton.network.PatchouliButtonServerPacket;
 
-public class PatchouliButtonMain implements ModInitializer {
+public class PatchouliButton implements ModInitializer {
 
     public static final Identifier PATCHOULI_BUTTON = new Identifier("patchoulibutton", "textures/gui/patchouli_button.png");
 

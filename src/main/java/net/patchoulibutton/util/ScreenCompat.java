@@ -10,7 +10,7 @@ import potionstudios.byg.client.gui.biomepedia.screen.BiomepediaHomeScreen;
 public class ScreenCompat {
 
     public static void setBiomepediaScreen(MinecraftClient client) {
-        client.setScreen(new BiomepediaHomeScreen(Text.literal("")));
+        client.setScreen(new BiomepediaHomeScreen(Text.of("")));
     }
 
 }

@@ -17,7 +17,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.patchoulibutton.PatchouliButtonMain;
+import net.patchoulibutton.PatchouliButton;
 import net.patchoulibutton.network.PatchouliButtonClientPacket;
 import vazkii.patchouli.api.PatchouliAPI;
 
@@ -31,22 +31,22 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
 
     @Inject(method = "mouseClicked", at = @At("HEAD"))
     private void mouseClickedMixin(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> info) {
-        if (this.client != null && this.focusedSlot == null && this.isPointWithinBounds(PatchouliButtonMain.CONFIG.posX, PatchouliButtonMain.CONFIG.posY, 20, 18, (double) mouseX, (double) mouseY))
-            if (PatchouliButtonMain.CONFIG.openAllBooksScreen)
+        if (this.client != null && this.focusedSlot == null && this.isPointWithinBounds(PatchouliButton.CONFIG.posX, PatchouliButton.CONFIG.posY, 20, 18, (double) mouseX, (double) mouseY))
+            if (PatchouliButton.CONFIG.openAllBooksScreen)
                 PatchouliButtonClientPacket.writeC2SModpackScreenPacket(client);
             else
-                PatchouliAPI.get().openBookGUI(new Identifier(PatchouliButtonMain.CONFIG.bookIdentifier));
+                PatchouliAPI.get().openBookGUI(new Identifier(PatchouliButton.CONFIG.bookIdentifier));
 
     }
 
     @Inject(method = "drawBackground", at = @At("TAIL"))
     protected void drawBackgroundMixin(MatrixStack matrices, float delta, int mouseX, int mouseY, CallbackInfo info) {
-        RenderSystem.setShaderTexture(0, PatchouliButtonMain.PATCHOULI_BUTTON);
-        if (this.isPointWithinBounds(PatchouliButtonMain.CONFIG.posX, PatchouliButtonMain.CONFIG.posY, 20, 18, (double) mouseX, (double) mouseY)) {
-            this.drawTexture(matrices, this.x + PatchouliButtonMain.CONFIG.posX, this.y + PatchouliButtonMain.CONFIG.posY, 166, 0, 20, 18);
-            this.renderTooltip(matrices, Text.translatable("screen.patchoulibutton"), mouseX, mouseY);
+        RenderSystem.setShaderTexture(0, PatchouliButton.PATCHOULI_BUTTON);
+        if (this.isPointWithinBounds(PatchouliButton.CONFIG.posX, PatchouliButton.CONFIG.posY, 20, 18, (double) mouseX, (double) mouseY)) {
+            this.drawTexture(matrices, this.x + PatchouliButton.CONFIG.posX, this.y + PatchouliButton.CONFIG.posY, 166, 0, 20, 18);
+            this.renderTooltip(matrices, Text.method_43471("screen.patchoulibutton"), mouseX, mouseY);
         } else
-            this.drawTexture(matrices, this.x + PatchouliButtonMain.CONFIG.posX, this.y + PatchouliButtonMain.CONFIG.posY, 146, 0, 20, 18);
+            this.drawTexture(matrices, this.x + PatchouliButton.CONFIG.posX, this.y + PatchouliButton.CONFIG.posY, 146, 0, 20, 18);
 
     }
 }
