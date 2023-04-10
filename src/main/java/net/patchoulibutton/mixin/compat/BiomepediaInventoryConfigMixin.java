@@ -14,9 +14,9 @@ public class BiomepediaInventoryConfigMixin {
 
     @Shadow
     @Mutable
-    private static BiomepediaInventoryConfig INSTANCE;
+    public static BiomepediaInventoryConfig INSTANCE;
 
-    @Inject(method = "Lpotionstudios/byg/client/BiomepediaInventoryConfig;getConfig(ZZ)Lpotionstudios/byg/client/BiomepediaInventoryConfig;", at = @At("RETURN"), cancellable = true, remap = false)
+    @Inject(method = "getConfig(ZZ)Lpotionstudios/byg/client/BiomepediaInventoryConfig;", at = @At("RETURN"), cancellable = true, remap = false)
     private static void getConfigMixin(boolean serialize, boolean recreate, CallbackInfoReturnable<BiomepediaInventoryConfig> info) {
         if (info.getReturnValue() != null && INSTANCE != null)
             info.setReturnValue(new BiomepediaInventoryConfig(false, INSTANCE.settings()));
