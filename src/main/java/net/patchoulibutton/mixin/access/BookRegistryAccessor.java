@@ -3,7 +3,6 @@ package net.patchoulibutton.mixin.access;
 import java.util.Map;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 import net.minecraft.util.Identifier;
@@ -14,6 +13,5 @@ import vazkii.patchouli.common.book.BookRegistry;
 public interface BookRegistryAccessor {
 
     @Accessor("books")
-    @Mutable
     Map<Identifier, Book> getBooks();
 }
