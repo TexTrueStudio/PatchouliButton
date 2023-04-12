@@ -13,6 +13,7 @@ import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.patchoulibutton.PatchouliButton;
@@ -26,7 +27,7 @@ public class PatchouliButtonScreen extends Screen {
     private int page = 0;
 
     public PatchouliButtonScreen(List<Object> list) {
-        super(Text.method_43471("screen.patchoulibutton.title"));
+        super(new TranslatableText("screen.patchoulibutton.title"));
         this.list.clear();
         this.list.addAll(list);
     }
@@ -52,14 +53,14 @@ public class PatchouliButtonScreen extends Screen {
 
             this.itemRenderer.renderInGui(new ItemStack(Registry.ITEM.get((Identifier) this.list.get(u + 1))), this.width / 2 - 60, this.height / 2 - 60 + ((u / 3) - this.page * 6) * 20);
 
-            String text = Text.method_43471((String) this.list.get(u + 2)).getString();
+            String text = new TranslatableText((String) this.list.get(u + 2)).getString();
             boolean isTooLong = this.textRenderer.getWidth(text) > 90;
             if (isTooLong)
                 text = text.substring(0, 14) + "..";
 
             this.textRenderer.draw(matrices, text, this.width / 2 - 36, this.height / 2 - 60 + ((u / 3) - this.page * 6) * 20 + 4, 0x000000);
             if (isTooLong && this.isPointWithinBounds(-62, -60 + ((u / 3) - this.page * 6) * 20, 110, 18, (double) mouseX, (double) mouseY))
-                this.renderTooltip(matrices, Text.method_43471((String) this.list.get(u + 2)), mouseX, mouseY);
+                this.renderTooltip(matrices, new TranslatableText((String) this.list.get(u + 2)), mouseX, mouseY);
 
             count++;
             if (count >= 6 || count >= (this.list.size() - this.page * 6 * 3) / 3)
