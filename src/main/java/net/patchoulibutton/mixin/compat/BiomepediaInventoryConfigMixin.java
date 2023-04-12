@@ -13,7 +13,6 @@ import potionstudios.byg.client.BiomepediaInventoryConfig;
 public class BiomepediaInventoryConfigMixin {
 
     @Shadow
-    @Mutable
     public static BiomepediaInventoryConfig INSTANCE;
 
     @Inject(method = "Lpotionstudios/byg/client/BiomepediaInventoryConfig;getConfig(ZZ)Lpotionstudios/byg/client/BiomepediaInventoryConfig;", at = @At("RETURN"), cancellable = true, remap = false)
