@@ -8,9 +8,9 @@
     "TexTrue","Globox_Z"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/patchoulibutton",
-    "sources": "https://github.com/Globox1997/PatchouliButton",
-    "issues": "https://github.com/Globox1997/PatchouliButton/issues"
+    "homepage": "https://github.com/TexTrueStudio/PatchouliButton-Backport",
+    "sources": "https://github.com/TexTrueStudio/PatchouliButton-Backport",
+    "issues": "https://github.com/TexTrueStudio/PatchouliButton-Backport/issues"
   },
   "license": "MIT",
   "icon": "assets/patchoulibutton/icon.png",
