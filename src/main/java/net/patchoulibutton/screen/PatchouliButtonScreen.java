@@ -7,6 +7,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.render.GameRenderer;
@@ -34,9 +35,9 @@ public class PatchouliButtonScreen extends Screen {
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-        RenderSystem.setShaderTexture(0, PatchouliButton.PATCHOULI_BUTTON);
+        //RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.blendColor(1.0f, 1.0f, 1.0f, 1.0f);
+        MinecraftClient.getInstance().getTextureManager().bindTexture(PatchouliButton.PATCHOULI_BUTTON);
 
         this.drawTexture(matrices, this.width / 2 - 73, this.height / 2 - 90, 0, 0, 146, 180);
         this.textRenderer.draw(matrices, this.title, this.width / 2 - this.textRenderer.getWidth(this.title) / 2, this.height / 2 - 75, 0x000000);
@@ -45,7 +46,7 @@ public class PatchouliButtonScreen extends Screen {
         int count = 0;
         for (; u < this.list.size(); u += 3) {
             if (this.isPointWithinBounds(-62, -60 + ((u / 3) - this.page * 6) * 20, 110, 18, (double) mouseX, (double) mouseY)) {
-                RenderSystem.setShaderTexture(0, PatchouliButton.PATCHOULI_BUTTON);
+                MinecraftClient.getInstance().getTextureManager().bindTexture(PatchouliButton.PATCHOULI_BUTTON);
                 RenderSystem.enableBlend();
                 this.drawTexture(matrices, this.width / 2 - 62, this.height / 2 - 61 + ((u / 3) - this.page * 6) * 20, 0, 200, 120, 18);
                 RenderSystem.disableBlend();
@@ -68,7 +69,7 @@ public class PatchouliButtonScreen extends Screen {
         }
 
         if (this.list.size() / 18 > 0) {
-            RenderSystem.setShaderTexture(0, PatchouliButton.PATCHOULI_BUTTON);
+            MinecraftClient.getInstance().getTextureManager().bindTexture(PatchouliButton.PATCHOULI_BUTTON);
             if (this.list.size() / 18 > this.page) {
                 // right
                 if (this.isPointWithinBounds(30, 65, 18, 10, (double) mouseX, (double) mouseY))
@@ -104,11 +105,7 @@ public class PatchouliButtonScreen extends Screen {
         int count = 0;
         for (; u < this.list.size(); u += 3) {
             if (this.isPointWithinBounds(-62, -60 + ((u / 3) - this.page * 6) * 20, 110, 18, (double) mouseX, (double) mouseY)) {
-                if (PatchouliButton.isBYGLoaded && ((Identifier) this.list.get(u)).equals(new Identifier("byg", "biomepedia"))) {
-                    ScreenCompat.setBiomepediaScreen(this.client);
-                } else {
-                    PatchouliAPI.get().openBookGUI((Identifier) this.list.get(u));
-                }
+                PatchouliAPI.get().openBookGUI((Identifier) this.list.get(u));
                 return true;
             }
 
@@ -128,14 +125,14 @@ public class PatchouliButtonScreen extends Screen {
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        if (this.client != null && this.client.options.inventoryKey.matchesKey(keyCode, scanCode))
-            this.client.setScreen(new InventoryScreen(this.client.player));
+        if (this.client != null && this.client.options.keyInventory.matchesKey(keyCode, scanCode))
+            this.client.openScreen(new InventoryScreen(this.client.player));
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
-    @Override
-    public boolean shouldPause() {
-        return false;
-    }
+    //@Override
+    //public boolean shouldPause() {
+    //    return false;
+    //}
 
 }

@@ -22,9 +22,6 @@ public class PatchouliButtonMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.contains("BiomepediaInventoryConfigMixin") && !FabricLoader.getInstance().isModLoaded("byg"))
-            return false;
-
         return true;
     }
 

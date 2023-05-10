@@ -27,7 +27,7 @@ public class PatchouliButtonClientPacket {
                 count++;
             }
             client.execute(() -> {
-                client.setScreen(new PatchouliButtonScreen(list));
+                client.openScreen(new PatchouliButtonScreen(list));
             });
         });
     }

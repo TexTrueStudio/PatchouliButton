@@ -1,7 +1,6 @@
 package net.patchoulibutton.mixin.client;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.TranslatableText;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -42,8 +41,8 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
 
     @Inject(method = "drawBackground", at = @At("TAIL"))
     protected void drawBackgroundMixin(MatrixStack matrices, float delta, int mouseX, int mouseY, CallbackInfo info) {
-        RenderSystem.setShaderTexture(0, PatchouliButton.PATCHOULI_BUTTON);
-        if (this.isPointWithinBounds(PatchouliButton.CONFIG.posX, PatchouliButton.CONFIG.posY, 20, 18, (double) mouseX, (double) mouseY)) {
+        MinecraftClient.getInstance().getTextureManager().bindTexture(PatchouliButton.PATCHOULI_BUTTON);
+        if (this.isPointWithinBounds(PatchouliButton.CONFIG.posX, PatchouliButton.CONFIG.posY, 20, 18, mouseX, mouseY)) {
             this.drawTexture(matrices, this.x + PatchouliButton.CONFIG.posX, this.y + PatchouliButton.CONFIG.posY, 166, 0, 20, 18);
             this.renderTooltip(matrices, new TranslatableText("screen.patchoulibutton"), mouseX, mouseY);
         } else

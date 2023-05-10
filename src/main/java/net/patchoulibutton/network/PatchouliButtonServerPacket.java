@@ -42,12 +42,6 @@ public class PatchouliButtonServerPacket {
             buf.writeIdentifier(Registry.ITEM.getId(item));
             buf.writeString(book.name);
         }
-        if (PatchouliButton.isBYGLoaded) {
-            Identifier identifier = new Identifier("byg", "biomepedia");
-            buf.writeIdentifier(identifier);
-            buf.writeIdentifier(identifier);
-            buf.writeString(Registry.ITEM.get(identifier).getName().getString());
-        }
         CustomPayloadS2CPacket packet = new CustomPayloadS2CPacket(OPEN_MODPACK_SCREEN_PACKET, buf);
         serverPlayerEntity.networkHandler.sendPacket(packet);
     }
